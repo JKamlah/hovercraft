@@ -1,5 +1,18 @@
 // Initialize impress.js
-impress().init();
+var impressAPI = impress();
+impressAPI.init();
+
+function receiver(event) {
+        if (event.origin == window.location.origin) {
+                if (event.data == 'Hello B') {
+                        event.source.postMessage('Hello A, how are you?', event.origin);
+                }
+                else {
+                        alert(event.data);
+                }
+        }
+}
+window.addEventListener('message', receiver, false);
 
 // Set up the help-box
 var helpdiv = window.document.getElementById('hovercraft-help');
